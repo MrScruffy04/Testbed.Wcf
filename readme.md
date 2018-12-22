@@ -11,3 +11,4 @@ See https://blogs.msdn.microsoft.com/carlosfigueira/2011/03/14/wcf-extensibility
 2. Reference UrlRoutingModule in web.config
 3. Add basic Service and ServiceDefinition classes
 4. Add dependency injection and routing
+5. Add one or more Services

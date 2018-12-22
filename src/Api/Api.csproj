@@ -46,6 +46,8 @@
   <ItemGroup>
     <Compile Include="ApiService.cs" />
     <Compile Include="ApiServiceDefinition.cs" />
+    <Compile Include="FooBars\FooBarService.cs" />
+    <Compile Include="FooBars\FooBarServiceDefinition.cs" />
     <Compile Include="IApiServiceDefinition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

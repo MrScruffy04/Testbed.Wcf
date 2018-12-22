@@ -24,6 +24,7 @@
 
 		private static void RegisterApiModules(ContainerBuilder builder)
 		{
+			builder.RegisterModule<Api.FooBarsModule>();
 		}
 
 		private static void SetDependencyResolver(IContainer container)
