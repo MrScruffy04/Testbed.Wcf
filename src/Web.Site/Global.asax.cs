@@ -9,6 +9,10 @@
 		protected void Application_Start(object sender, EventArgs e)
 		{
 			System.Diagnostics.Debug.WriteLine("Global.Application_Start() invoked");
+
+			Startup.DependencyInjection.DependencyInjection.Configure();
+
+			Startup.Routing.Routing.Configure();
 		}
 
 		protected void Session_Start(object sender, EventArgs e)
