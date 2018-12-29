@@ -50,6 +50,7 @@
       <HintPath>..\packages\Autofac.Wcf.4.1.0\lib\net45\Autofac.Integration.Wcf.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.IdentityModel" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Activation" />
     <Reference Include="System.Web.DynamicData" />
@@ -86,6 +87,7 @@
     <Compile Include="Startup\DependencyInjection\DependencyInjection.cs" />
     <Compile Include="Startup\DependencyInjection\SiteModule.cs" />
     <Compile Include="Startup\Routing\Routing.cs" />
+    <Compile Include="Startup\ServiceHostConfiguration\ServiceHostConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
