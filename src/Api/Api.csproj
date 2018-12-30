@@ -49,6 +49,9 @@
   <ItemGroup>
     <Compile Include="ApiService.cs" />
     <Compile Include="ApiServiceDefinition.cs" />
+    <Compile Include="Errors\ApiException.cs" />
+    <Compile Include="Errors\NotAuthorizedException.cs" />
+    <Compile Include="Errors\ResourceNotFoundException.cs" />
     <Compile Include="FooBars\FooBarService.cs" />
     <Compile Include="FooBars\FooBarServiceDefinition.cs" />
     <Compile Include="IApiServiceDefinition.cs" />
