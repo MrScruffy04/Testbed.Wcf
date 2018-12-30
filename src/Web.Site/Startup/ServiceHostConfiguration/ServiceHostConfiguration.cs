@@ -8,11 +8,13 @@
 
 	public static class ServiceHostConfiguration
 	{
-		public static void Configure(ServiceHostBase serviceHost, ServiceAuthenticationManager authenticationManager, IEnumerable<IAuthorizationPolicy> authorizationPolicies)
+		public static void Configure(ServiceHostBase serviceHost, ServiceAuthenticationManager authenticationManager, IEnumerable<IAuthorizationPolicy> authorizationPolicies, IServiceBehavior errorBehavior)
 		{
 			SetAuthenticationManager(serviceHost, authenticationManager);
 
 			SetAuthorizationPolicies(serviceHost, authorizationPolicies);
+
+			SetErrorHandlers(serviceHost, errorBehavior);
 		}
 
 		private static void SetAuthenticationManager(ServiceHostBase serviceHost, ServiceAuthenticationManager authenticationManager)
@@ -25,6 +27,11 @@
 			serviceHost.Authorization.PrincipalPermissionMode = PrincipalPermissionMode.Custom;
 
 			serviceHost.Authorization.ExternalAuthorizationPolicies = authorizationPolicies.ToList().AsReadOnly();
+		}
+
+		private static void SetErrorHandlers(ServiceHostBase serviceHost, IServiceBehavior errorBehavior)
+		{
+			serviceHost.Description.Behaviors.Add(errorBehavior);
 		}
 	}
 }

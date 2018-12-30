@@ -28,6 +28,7 @@
 
 		private static void RegisterApiModules(ContainerBuilder builder)
 		{
+			builder.RegisterModule<Api.ErrorModule>();
 			builder.RegisterModule<Api.FooBarsModule>();
 			builder.RegisterModule<Api.SecurityModule>();
 		}
@@ -45,7 +46,9 @@
 
 				var authorizationPolicies = container.Resolve<IEnumerable<IAuthorizationPolicy>>();
 
-				ServiceHostConfiguration.ServiceHostConfiguration.Configure(serviceHost, authenticationManager, authorizationPolicies);
+				var errorBehavior = container.ResolveNamed<IServiceBehavior>(Api.ErrorModule.ErrorBehavior);
+
+				ServiceHostConfiguration.ServiceHostConfiguration.Configure(serviceHost, authenticationManager, authorizationPolicies, errorBehavior);
 			};
 		}
 	}

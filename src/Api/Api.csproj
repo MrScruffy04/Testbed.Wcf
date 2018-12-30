@@ -38,6 +38,7 @@
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.ServiceModel.Activation" />
     <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -52,6 +53,11 @@
     <Compile Include="Errors\ApiException.cs" />
     <Compile Include="Errors\NotAuthorizedException.cs" />
     <Compile Include="Errors\ResourceNotFoundException.cs" />
+    <Compile Include="Errors\ApiErrorResponseFactory.cs" />
+    <Compile Include="Errors\ApiErrorServiceBehavior.cs" />
+    <Compile Include="Errors\ApiErrorHandler.cs" />
+    <Compile Include="Errors\ErrorModel.cs" />
+    <Compile Include="Errors\IApiErrorResponseFactory.cs" />
     <Compile Include="FooBars\FooBarService.cs" />
     <Compile Include="FooBars\FooBarServiceDefinition.cs" />
     <Compile Include="IApiServiceDefinition.cs" />
@@ -59,6 +65,7 @@
     <Compile Include="Security\ApiAuthorizationPolicy.cs" />
     <Compile Include="Security\ApiServiceAuthenticationManager.cs" />
     <Compile Include="Security\AuthorizationHeaderReader.cs" />
+    <Compile Include="Xml\XmlSerializerExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

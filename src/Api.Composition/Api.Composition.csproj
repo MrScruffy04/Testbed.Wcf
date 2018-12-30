@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ErrorModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FooBarsModule.cs" />
     <Compile Include="SecurityModule.cs" />
