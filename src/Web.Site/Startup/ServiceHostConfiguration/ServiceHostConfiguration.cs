@@ -8,25 +8,36 @@
 
 	public static class ServiceHostConfiguration
 	{
-		public static void Configure(ServiceHostBase serviceHost, ServiceAuthenticationManager authenticationManager, IEnumerable<IAuthorizationPolicy> authorizationPolicies, IServiceBehavior errorBehavior)
+		public static void Configure(ServiceHostBase serviceHost, ServiceAuthenticationManager authenticationManager, IEnumerable<IAuthorizationPolicy> authorizationPolicies, IOperationBehavior authorizationInvokerBehavior, IServiceBehavior errorBehavior)
 		{
-			SetAuthenticationManager(serviceHost, authenticationManager);
+			SetAuthentication(serviceHost, authenticationManager, authorizationPolicies);
 
-			SetAuthorizationPolicies(serviceHost, authorizationPolicies);
+			SetAuthorizationInvokerBehavior(serviceHost, authorizationInvokerBehavior);
 
 			SetErrorHandlers(serviceHost, errorBehavior);
 		}
 
-		private static void SetAuthenticationManager(ServiceHostBase serviceHost, ServiceAuthenticationManager authenticationManager)
-		{
-			serviceHost.Authentication.ServiceAuthenticationManager = authenticationManager;
-		}
-
-		private static void SetAuthorizationPolicies(ServiceHostBase serviceHost, IEnumerable<IAuthorizationPolicy> authorizationPolicies)
+		private static void SetAuthentication(ServiceHostBase serviceHost, ServiceAuthenticationManager authenticationManager, IEnumerable<IAuthorizationPolicy> authorizationPolicies)
 		{
 			serviceHost.Authorization.PrincipalPermissionMode = PrincipalPermissionMode.Custom;
 
+			serviceHost.Authentication.ServiceAuthenticationManager = authenticationManager;
+
 			serviceHost.Authorization.ExternalAuthorizationPolicies = authorizationPolicies.ToList().AsReadOnly();
+		}
+
+		private static void SetAuthorizationInvokerBehavior(ServiceHostBase serviceHost, IOperationBehavior authorizationInvokerBehavior)
+		{
+			serviceHost.Opening += (sender, args) =>
+			{
+				foreach (var ep in serviceHost.Description.Endpoints)
+				{
+					foreach (var od in ep.Contract.Operations)
+					{
+						od.OperationBehaviors.Add(authorizationInvokerBehavior);
+					}
+				}
+			};
 		}
 
 		private static void SetErrorHandlers(ServiceHostBase serviceHost, IServiceBehavior errorBehavior)

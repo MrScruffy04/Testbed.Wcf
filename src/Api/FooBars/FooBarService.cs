@@ -1,6 +1,7 @@
 ﻿namespace AbstractInterfaces.Api.FooBars
 {
 	using AbstractInterfaces.Api.Errors;
+	using AbstractInterfaces.Api.Security;
 	using System;
 	using System.ServiceModel;
 	using System.ServiceModel.Web;
@@ -16,6 +17,7 @@
 		}
 
 		[WebGet(UriTemplate = "today")]
+		[Authorize(Roles = "Alpha, Bravo")]
 		public XElement GetDate()
 		{
 			return new XElement("root", DateTime.UtcNow);

@@ -3,6 +3,7 @@
 	using Autofac;
 	using System.Collections.Generic;
 	using System.IdentityModel.Policy;
+	using System.ServiceModel.Description;
 
 	public static class DependencyInjection
 	{
@@ -46,9 +47,11 @@
 
 				var authorizationPolicies = container.Resolve<IEnumerable<IAuthorizationPolicy>>();
 
+				var authorizationInvokerBehavior = container.ResolveNamed<IOperationBehavior>(Api.SecurityModule.AuthorizationCheck);
+
 				var errorBehavior = container.ResolveNamed<IServiceBehavior>(Api.ErrorModule.ErrorBehavior);
 
-				ServiceHostConfiguration.ServiceHostConfiguration.Configure(serviceHost, authenticationManager, authorizationPolicies, errorBehavior);
+				ServiceHostConfiguration.ServiceHostConfiguration.Configure(serviceHost, authenticationManager, authorizationPolicies, authorizationInvokerBehavior, errorBehavior);
 			};
 		}
 	}

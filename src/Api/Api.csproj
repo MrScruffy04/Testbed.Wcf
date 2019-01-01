@@ -62,9 +62,12 @@
     <Compile Include="FooBars\FooBarServiceDefinition.cs" />
     <Compile Include="IApiServiceDefinition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\ApiAuthorizationOperationBehavior.cs" />
+    <Compile Include="Security\ApiAuthorizationOperationInvoker.cs" />
     <Compile Include="Security\ApiAuthorizationPolicy.cs" />
     <Compile Include="Security\ApiServiceAuthenticationManager.cs" />
     <Compile Include="Security\AuthorizationHeaderReader.cs" />
+    <Compile Include="Security\AuthorizeAttribute.cs" />
     <Compile Include="Xml\XmlSerializerExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
