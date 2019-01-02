@@ -15,3 +15,4 @@ See https://blogs.msdn.microsoft.com/carlosfigueira/2011/03/14/wcf-extensibility
 6. Add an AuthorizationPolicy
 7. Add an ErrorHandler
 8. Add declarative authorization checks (primarily for role-based authorization)
+9. Add method authorization checks (primarily for resource authorization)

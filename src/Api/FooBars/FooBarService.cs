@@ -34,5 +34,30 @@
 		{
 			throw new Exception("oops");
 		}
+
+		[WebGet(UriTemplate = "{key}")]
+		public XElement GetResource(string key)
+		{
+			var resource = GetOwnedResource(key);
+
+			return new XElement("resource", resource);
+		}
+
+		private string GetOwnedResource(string key)
+		{
+			EnsureOwnership(key);
+
+			//  Retrieve a resource based on the key
+			return key;
+		}
+
+		private void EnsureOwnership(string key /*object resource*/)
+		{
+			//  This can be done by evaluating the key (preferred) or the resource
+			if (GetPrincipal().Identity.Name != key)
+			{
+				throw new NotAuthorizedException(); //  Use base type for all application errors
+			}
+		}
 	}
 }
