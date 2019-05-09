@@ -1,14 +1,17 @@
 ﻿namespace AbstractInterfaces.Api.FooBars
 {
 	using AbstractInterfaces.Api.Errors;
+	using AbstractInterfaces.Api.Models.FooBars;
 	using AbstractInterfaces.Api.Security;
 	using System;
+	using System.Collections.Generic;
 	using System.ServiceModel;
 	using System.ServiceModel.Web;
 	using System.Xml.Linq;
 
 	[ServiceContract]
 	[ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
+	[XmlSerializerFormat]
 	public sealed class FooBarService : ApiService
 	{
 		public FooBarService()
@@ -36,19 +39,29 @@
 		}
 
 		[WebGet(UriTemplate = "{key}")]
-		public XElement GetResource(string key)
+		public FooBar GetResource(string key)
 		{
 			var resource = GetOwnedResource(key);
 
-			return new XElement("resource", resource);
+			return GetOwnedResource(key);
 		}
 
-		private string GetOwnedResource(string key)
+		[OperationContract]
+		[WebInvoke(Method = "POST", UriTemplate = "{key}")]
+		//public void UpdateResource(string key, FooBar resource)
+		public void UpdateResource(string key, FooBar resource)
+		{
+			EnsureOwnership(key);
+
+			//  Call persistence mechanism
+		}
+
+		private FooBar GetOwnedResource(string key)
 		{
 			EnsureOwnership(key);
 
 			//  Retrieve a resource based on the key
-			return key;
+			return new FooBar { Name = key, Age = 42, AcceptedTerms = true, BirthDate = DateTime.Parse("1982-01-08T00:04:00Z").ToUniversalTime(), Interests = new List<string> { "programming", "video games", "music", } };
 		}
 
 		private void EnsureOwnership(string key /*object resource*/)
