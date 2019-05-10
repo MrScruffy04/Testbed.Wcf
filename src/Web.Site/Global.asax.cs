@@ -10,6 +10,8 @@
 		{
 			System.Diagnostics.Debug.WriteLine("Global.Application_Start() invoked");
 
+			Startup.AppInsightsConfiguration.AppInsightsConfiguration.Configure();
+
 			Startup.DependencyInjection.DependencyInjection.Configure();
 
 			Startup.Routing.Routing.Configure();
