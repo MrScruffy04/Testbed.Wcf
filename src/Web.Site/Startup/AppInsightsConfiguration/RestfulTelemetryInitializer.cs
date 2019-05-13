@@ -23,6 +23,8 @@
 			{
 				EvaluateRequest(rt);
 			}
+
+			//TODO: Special code for ExceptionTelemetry?
 		}
 
 		private void EvaluateRequest(RequestTelemetry requestTelemetry)

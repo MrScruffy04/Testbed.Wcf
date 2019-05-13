@@ -89,6 +89,8 @@
 			if (statusCode == 0 || (int)statusCode >= 500)
 			{
 				//TODO: Log exception
+				//Use ExceptionTelemetry to log exception
+				//client.TrackException()
 			}
 
 			return true;  //  Meaning that the exception was "contained"
