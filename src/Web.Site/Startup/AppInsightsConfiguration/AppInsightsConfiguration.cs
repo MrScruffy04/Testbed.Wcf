@@ -1,16 +1,20 @@
 ﻿namespace AbstractInterfaces.Web.Startup.AppInsightsConfiguration
 {
+	using AbstractInterfaces.Api;
 	using Microsoft.ApplicationInsights.Extensibility;
 	using Microsoft.ApplicationInsights.Extensibility.PerfCounterCollector.QuickPulse;
+	using System.Collections.Generic;
 	using System.Configuration;
 
 	public static class AppInsightsConfiguration
 	{
-		public static void Configure()
+		public static void Configure(IEnumerable<IOpNameFactory> opNameFactories)
 		{
 			var config = TelemetryConfiguration.Active;
 
 			config.InstrumentationKey = GetInstrumentationKey();
+
+			config.TelemetryInitializers.Add(new RestfulTelemetryInitializer(opNameFactories));
 
 			AddQuickPulseProcessor(config, GetQuickPulseApiKey());
 		}

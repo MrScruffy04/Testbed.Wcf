@@ -1,6 +1,9 @@
 ﻿namespace AbstractInterfaces.Web
 {
+	using AbstractInterfaces.Api;
+	using Autofac;
 	using System;
+	using System.Collections.Generic;
 	using System.Web;
 
 	public class Global : HttpApplication
@@ -10,11 +13,16 @@
 		{
 			System.Diagnostics.Debug.WriteLine("Global.Application_Start() invoked");
 
-			Startup.AppInsightsConfiguration.AppInsightsConfiguration.Configure();
-
 			Startup.DependencyInjection.DependencyInjection.Configure();
 
+			Startup.AppInsightsConfiguration.AppInsightsConfiguration.Configure(GetOpNameFactories());
+
 			Startup.Routing.Routing.Configure();
+		}
+
+		private IEnumerable<IOpNameFactory> GetOpNameFactories()
+		{
+			return Autofac.Integration.Wcf.AutofacHostFactory.Container.Resolve<IEnumerable<IOpNameFactory>>();
 		}
 
 		protected void Session_Start(object sender, EventArgs e)

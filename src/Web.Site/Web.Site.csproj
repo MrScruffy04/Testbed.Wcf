@@ -118,6 +118,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup\AppInsightsConfiguration\AppInsightsConfiguration.cs" />
+    <Compile Include="Startup\AppInsightsConfiguration\RestfulTelemetryInitializer.cs" />
     <Compile Include="Startup\DependencyInjection\DependencyInjection.cs" />
     <Compile Include="Startup\DependencyInjection\SiteModule.cs" />
     <Compile Include="Startup\Routing\Routing.cs" />
