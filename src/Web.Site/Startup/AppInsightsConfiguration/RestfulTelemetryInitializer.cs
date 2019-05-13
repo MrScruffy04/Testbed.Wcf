@@ -28,6 +28,7 @@
 		private void EvaluateRequest(RequestTelemetry requestTelemetry)
 		{
 			NormalizeOpName(requestTelemetry);
+			SetSuccess(requestTelemetry);
 		}
 
 		private void NormalizeOpName(RequestTelemetry requestTelemetry)
@@ -45,6 +46,14 @@
 				{
 					requestTelemetry.Properties.Add(item);
 				}
+			}
+		}
+
+		private void SetSuccess(RequestTelemetry requestTelemetry)
+		{
+			if (int.TryParse(requestTelemetry.ResponseCode, out var statusCode))
+			{
+				requestTelemetry.Success = statusCode < 500;
 			}
 		}
 	}
